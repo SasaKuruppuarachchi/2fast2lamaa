@@ -26,8 +26,8 @@ def generate_launch_description():
             executable='lidar_scan_odometry', 
             name='lidar_scan_odometry',
             remappings=[
-                ('/imu/acc', '/livox/imu'),
-                ('/imu/gyr', '/livox/imu'),
+                ('/imu/acc', '/px4_imu'),
+                ('/imu/gyr', '/px4_imu'),
                 ('/lidar_raw_points', '/livox/lidar')
             ],
             parameters=[
@@ -51,9 +51,9 @@ def generate_launch_description():
                 {"invert_imu": False},
 
                 ## Calibration
-                {"calib_px": -0.011},
-                {"calib_py": -0.02329},
-                {"calib_pz": 0.04412},
+                {"calib_px": 0.0795}, #-0.011
+                {"calib_py": 0.0}, #-0.02329
+                {"calib_pz": 0.0323}, #0.04412
                 {"calib_rx": 0.},
                 {"calib_ry": 0.},
                 {"calib_rz": 0.},
@@ -106,7 +106,7 @@ def generate_launch_description():
         ),
         Node(package = "tf2_ros", 
                        executable = "static_transform_publisher",
-                       arguments = ["0", "0", "0", "0", "0", "0.0",  "map", "map_viz"]),
+                       arguments = ["0", "0", "0", "0", "0", "3.14",  "map", "map_viz"]),
         Node(
             package='rviz2', 
             executable='rviz2', 
